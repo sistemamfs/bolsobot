@@ -284,8 +284,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2
       <a href="#duvidas">Dúvidas</a>
     </div>
     <div class="nav-actions">
-      <a href="bolsobot.html" class="btn-entrar">Entrar</a>
-      <a href="bolsobot.html" class="btn-comecar">Começar</a>
+      <a href="https://bolsobot.vercel.app/app.html" class="btn-entrar">Entrar</a>
+      <a href="https://kiwify.app/so4NpQx" class="btn-comecar">Começar</a>
     </div>
   </div>
 </nav>
@@ -306,7 +306,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2
     <h1>Chega de <span class="highlight">perder dinheiro</span><br>sem saber pra onde vai</h1>
     <p class="hero-sub">Mande <strong>"uber 32"</strong> no WhatsApp e o BolsoBot registra, categoriza e mostra seu saldo atualizado. <span class="green">Em 3 segundos.</span></p>
     <div class="cta-wrap">
-      <a href="bolsobot.html" class="btn-hero">Começar Agora →</a>
+      <a href="https://kiwify.app/so4NpQx" class="btn-hero">Começar Agora →</a>
       <div class="hero-meta">
         <span>✅ 7 dias grátis</span>
         <span>⚡ Via WhatsApp</span>
@@ -495,6 +495,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2
         <div class="plan-step"><div class="ps-num inactive">2</div><span class="ps-label inactive">Pagamento</span></div>
       </div>
     </div>
+    <!-- TOGGLE MENSAL/ANUAL -->
+    <div style="display:flex;justify-content:center;margin-bottom:2rem">
+      <div style="display:flex;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:4px;gap:4px">
+        <button onclick="setPlano('mensal')" id="btnMensal" style="padding:.45rem 1.5rem;border-radius:100px;border:none;font-size:.85rem;font-weight:600;cursor:pointer;background:var(--green);color:#000;font-family:'Inter',sans-serif;transition:.2s">Mensal</button>
+        <button onclick="setPlano('anual')" id="btnAnual" style="padding:.45rem 1.5rem;border-radius:100px;border:none;font-size:.85rem;font-weight:600;cursor:pointer;background:transparent;color:var(--text2);font-family:'Inter',sans-serif;transition:.2s">Anual <span style="background:#EF4444;color:#fff;font-size:.65rem;padding:.1rem .4rem;border-radius:100px;margin-left:.3rem">3 meses grátis</span></button>
+      </div>
+    </div>
+
     <div class="plans-grid">
       <div class="plan-card">
         <div class="plan-icon pi-blue">⚡</div>
@@ -502,7 +510,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2
         <div class="plan-desc">Controle financeiro completo</div>
         <div class="plan-price">
           <div class="plan-from">A partir de</div>
-          <div><span class="plan-val">R$ 29,90</span><span class="plan-period">/mês</span></div>
+          <div><span class="plan-val" id="proPriceVal">R$ 19,90</span><span class="plan-period" id="proPricePer">/mês</span></div>
+          <div id="proEcon" style="display:none;font-size:.75rem;color:var(--green);margin-top:.3rem">💚 Economize R$ 59,90 no anual</div>
         </div>
         <div class="plan-trial">✅ 7 dias grátis para testar</div>
         <ul class="plan-features">
@@ -517,7 +526,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2
           <li class="disabled"><span class="no">✗</span> Diagnóstico Raio-X com IA</li>
           <li class="disabled"><span class="no">✗</span> Chat com IA financeira</li>
         </ul>
-        <a href="bolsobot.html" class="btn-plan dark">Escolher PRO →</a>
+        <a href="https://kiwify.app/33UUlHg" id="proLink" class="btn-plan dark">Escolher PRO →</a>
       </div>
       <div class="plan-card featured">
         <div class="plan-popular">⭐ MAIS POPULAR</div>
@@ -527,7 +536,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2
         <div class="plan-econ">💡 Usuários economizam em média <strong>R$ 847/mês com insights automáticos</strong></div>
         <div class="plan-price">
           <div class="plan-from">A partir de</div>
-          <div><span class="plan-val">R$ 47,90</span><span class="plan-period">/mês</span></div>
+          <div><span class="plan-val" id="iaPriceVal">R$ 29,90</span><span class="plan-period" id="iaPricePer">/mês</span></div>
+          <div id="iaEcon" style="display:none;font-size:.75rem;color:var(--green);margin-top:.3rem">💚 Economize R$ 89,90 no anual</div>
         </div>
         <div class="plan-trial">✅ 7 dias grátis · Cartão não necessário</div>
         <ul class="plan-features">
@@ -539,10 +549,28 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2
           <li><span class="ok">✓</span> Insights e alertas proativos</li>
           <li><span class="ok">✓</span> Chat ilimitado com IA financeira</li>
         </ul>
-        <a href="bolsobot.html" class="btn-plan orange">Escolher BolsoBot IA →</a>
+        <a href="https://kiwify.app/so4NpQx" id="iaLink" class="btn-plan orange">Escolher BolsoBot IA →</a>
         <div class="plan-choice">⭐ Escolha de 78% dos novos usuários</div>
       </div>
     </div>
+
+    <script>
+    function setPlano(tipo){
+      const mensal = tipo === 'mensal';
+      document.getElementById('btnMensal').style.background = mensal ? 'var(--green)' : 'transparent';
+      document.getElementById('btnMensal').style.color = mensal ? '#000' : 'var(--text2)';
+      document.getElementById('btnAnual').style.background = !mensal ? 'var(--green)' : 'transparent';
+      document.getElementById('btnAnual').style.color = !mensal ? '#000' : 'var(--text2)';
+      document.getElementById('proPriceVal').textContent = mensal ? 'R$ 19,90' : 'R$ 178,90';
+      document.getElementById('proPricePer').textContent = mensal ? '/mês' : '/ano';
+      document.getElementById('iaPriceVal').textContent = mensal ? 'R$ 29,90' : 'R$ 268,90';
+      document.getElementById('iaPricePer').textContent = mensal ? '/mês' : '/ano';
+      document.getElementById('proEcon').style.display = mensal ? 'none' : 'block';
+      document.getElementById('iaEcon').style.display = mensal ? 'none' : 'block';
+      document.getElementById('proLink').href = mensal ? 'https://kiwify.app/33UUlHg' : 'https://kiwify.app/KqgcClC';
+      document.getElementById('iaLink').href = mensal ? 'https://kiwify.app/so4NpQx' : 'https://pay.kiwify.com.br/yqqxj9U';
+    }
+    </script>
     <div class="plan-guarantees">
       <div class="pg">🔒 Pagamento 100% seguro</div>
       <div class="pg">✅ Garantia de 7 dias</div>
@@ -578,7 +606,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2
       </div>
     </div>
     <div style="text-align:center">
-      <a href="bolsobot.html" class="btn-hero">Começar Agora →</a>
+      <a href="https://kiwify.app/so4NpQx" class="btn-hero">Começar Agora →</a>
     </div>
   </div>
 </div>
@@ -634,7 +662,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2
         <div class="faq-a">Sim, o plano anual é cobrado de uma vez com desconto de até 40%. No plano mensal, a cobrança é todo mês. Você pode cancelar quando quiser.</div>
       </div>
     </div>
-    <div class="faq-link"><a href="bolsobot.html">Começar com garantia de 7 dias →</a></div>
+    <div class="faq-link"><a href="https://kiwify.app/so4NpQx">Começar com garantia de 7 dias →</a></div>
   </div>
 </div>
 
@@ -644,8 +672,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 2
   <h2 class="final-title">Comece com controle. <span class="hl">Evolua com IA.</span></h2>
   <p class="final-sub">Escolha o PRO para controle completo, ou o BolsoBot IA para ter um assessor financeiro com inteligência artificial no seu bolso.</p>
   <div class="final-btns">
-    <a href="bolsobot.html" class="btn-final-orange">🤖 Quero BolsoBot IA Anual →</a>
-    <a href="bolsobot.html" class="btn-final-dark">Assinar PRO Anual</a>
+    <a href="https://pay.kiwify.com.br/yqqxj9U" class="btn-final-orange">🤖 Quero BolsoBot IA Anual →</a>
+    <a href="https://kiwify.app/KqgcClC" class="btn-final-dark">Assinar PRO Anual</a>
   </div>
   <div class="final-meta">
     <span>🔒 Garantia de 7 dias</span>
